@@ -8,9 +8,9 @@ namespace SeaBattle
 {
 	public enum Cell
 	{
-		Empty,
-		Miss,
-		Hit,
+		Empty = default,
+		Miss = 1,
+		Hit = 2,
 		/*
 			Hit or miss
 			I guess they never miss, huh?
