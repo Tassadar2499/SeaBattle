@@ -10,6 +10,6 @@ namespace SeaBattle
 	{
 		bool[,] CreateStartPos(int fieldSize, IEnumerable<(int length, int count)> ships);
 
-		(int x, int y) MakeStep(Cell[,] field)
+		(int x, int y) MakeStep(Cell[,] field);
 	}
 }
