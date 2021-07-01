@@ -75,7 +75,6 @@ namespace SeaBattle
 
 		private bool InvokeBotTurn(IBot bot, Cell[,] botPlayField, bool[,] enemyBotShipsPosition)
 		{
-
 			Console.WriteLine("\n***************************");
 			Console.WriteLine($"{bot.Name} step: ");
 

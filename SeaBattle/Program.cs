@@ -15,8 +15,6 @@ namespace SeaBattle
 			(1, 4),
 		};
 
-
-
 		static void Main(string[] args)
 		{
 			Console.WriteLine("SeaBattle v0.01");
