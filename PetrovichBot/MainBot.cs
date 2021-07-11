@@ -3,16 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SeaBattle
+namespace PetrovichBot
 {
-	public class DefaultBot : IBot
+	public class MainBot : IBot
 	{
 		public string Name { get; set; }
-
-		public DefaultBot(string name = "DefaultBot")
-		{
-			Name = name;
-		}
 
 		public bool[,] CreateStartPos(int fieldSize, IEnumerable<(int length, int count)> ships)
 		{

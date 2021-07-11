@@ -1,8 +1,7 @@
-﻿using System;
+﻿using SeaBattleInterfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SeaBattle
 {
@@ -41,7 +40,7 @@ namespace SeaBattle
 			where T : struct
 		{
 			if (array.GetUpperBound(0) + 1 != size || array.GetUpperBound(1) + 1 != size)
-				throw new ArgumentException(nameof(array));
+				throw new ArgumentException(null, nameof(array));
 
 			var newArray = new T[size, size];
 

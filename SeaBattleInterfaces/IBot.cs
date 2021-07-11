@@ -1,17 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace SeaBattle
+namespace SeaBattleInterfaces
 {
 	public enum Cell
 	{
 		Empty = default,
 		Miss = 1,
-		Hit = 2,
-		/*
+		Wound = 2,
+		Hit = 3
+	}
+
+	public interface IBot
+	{
+		string Name { get; set; }
+
+		bool[,] CreateStartPos(int fieldSize, IEnumerable<(int length, int count)> ships);
+
+		(int x, int y) MakeStep(Cell[,] field);
+	}
+
+	/*
 			Hit or miss
 			I guess they never miss, huh?
 			You got a boyfriend, I bet he doesn't kiss ya
@@ -39,5 +47,4 @@ namespace SeaBattle
 			⣿⣿⣿⣿⡿⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿
 			⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⣶⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡆⠀⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿
 		*/
-	}
 }
