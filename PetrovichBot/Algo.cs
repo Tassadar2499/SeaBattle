@@ -18,50 +18,85 @@ namespace PetrovichBot
 				var accum = 0;
 				for (int j = 0; j < length; j++)
 				{
-					if (field[j, i] == Cell.Empty)
+					var cell = field[j, i];
+					if (cell == Cell.Empty || cell == Cell.Miss)
 						accum++;
 					else
 						accum = 0;
-				}
 
-				if (accum >= size)
-					yield return i;
+					if (accum == size + 2)
+					{
+						yield return i;
+						break;
+					}
+				}
 			}
 		}
 
-		//TODO: Убрать все номера кроме тех, что идут подряд count раз
-		public static IEnumerable<int> FilterNumbersBySeqCount(int[] arr, int count)
+		public static IEnumerable<int[]> GroupNumbers(int[] arr)
 		{
-			var seqNumbers = new List<int>()
+			var length = arr.Length;
+			if (length < 2)
+				yield break;
+
+			var groupQueue = new Queue<int>();
+			for (int i = 0; i < length; i++)
 			{
-				arr[0]
-			};
-
-			for (int i = 1; i < arr.Length; i++)
-			{
-				if (arr[i - 1] + 1 == arr[i])
+				groupQueue.Enqueue(arr[i]);
+				if (groupQueue.Count == 3)
 				{
-					seqNumbers.Add(arr[i]);
-				}
-				else
-				{
-					seqNumbers = new List<int>
+					var groupArr = groupQueue.ToArray();
+					if (groupArr[0] + 1 == groupArr[1] && groupArr[1] + 1 == groupArr[2])
 					{
-						arr[i]
-					};
-				}
-
-				if (seqNumbers.Count == count)
-				{
-					foreach (var number in seqNumbers)
-						yield return number;
-
-					seqNumbers = new List<int>
+						yield return groupArr;
+						groupQueue.Clear();
+					}
+					else
 					{
-						arr[i]
-					};
+						groupQueue.Dequeue();
+					}
 				}
 			}
+		}
+
+		public static bool IsShipCanBeAtLine(Cell[] line, int size)
+		{
+			var accum = 0;
+			foreach (var cell in line)
+			{
+				if (cell == Cell.Empty)
+					accum++;
+				else
+					accum = 0;
+
+				if (accum == size)
+					return true;
+			}
+
+			return false;
+		}
+
+		public static int GetIndexOfShootByBoundary(Cell[] line, int size)
+		{
+			var accum = new List<int>();
+			for (int i = 0; i < line.Length; i++)
+			{
+				if (line[i] == Cell.Empty)
+					accum.Add(i);
+				else
+					accum = new List<int>();
+
+				if (accum.Count == size)
+				{
+					var middle = size / 2;
+					if (size % 2 == 0)
+						return middle;
+					else
+						return middle + 1;
+				}
+			}
+
+			return -1;
 		}
 	}
 }
